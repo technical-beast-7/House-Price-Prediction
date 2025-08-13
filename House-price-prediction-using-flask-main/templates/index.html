@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>House Price Prediction</h2>
+        <form method="POST">
+            <input type="number" name="bedrooms" placeholder="Bedrooms" required>
+            <input type="number" name="bathrooms" step="0.5" placeholder="Bathrooms" required>
+            <input type="number" name="sqft_living" placeholder="Sqft Living" required>
+            <input type="number" name="floors" step="0.5" placeholder="Floors" required>
+            <select name="waterfront" required>
+                <option value="0">No Waterfront</option>
+                <option value="1">Waterfront</option>
+            </select>
+            <input type="number" name="view" min="0" max="4" placeholder="View (0-4)" required>
+            <input type="number" name="condition" min="1" max="5" placeholder="Condition (1-5)" required>
+            <input type="number" name="grade" min="1" max="13" placeholder="Grade (1-13)" required>
+            <button type="submit">Predict Price</button>
+        </form>
+        {% if prediction %}
+            <div class="result">
+                {% if prediction != "Invalid input!" %}
+                    💰 Estimated Price: ${{ prediction }}
+                {% else %}
+                    ⚠ {{ prediction }}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
